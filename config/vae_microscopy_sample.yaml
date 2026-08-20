@@ -1,0 +1,30 @@
+# Sample config: trains on a small curated subset of REAL images in
+# sample_data/ (see scripts/build_sample_metadata.py). Illustrates the
+# pipeline on real biology; the small image count means it won't produce a
+# strong model.
+project_name: "microscopy_vae"
+experiment_name: "microscopy_vae_sample"
+data: "metadata/sample_metadata.csv"
+data_root: "sample_data"
+
+model:
+  name: "microscopy_vae_sample"
+  in_channels: 3
+  latent_channels: 4
+  base_channels: 64
+
+preprocessing:
+  img_size: 256
+
+training:
+  epochs: 20
+  batch_size: 16
+  learning_rate: 1e-4
+  warmup_ratio: 0.05
+  beta: 1.0e-07
+  alpha_ssim: 0.6
+  lam_rot: 0.0
+  ema_decay: 0.999
+  log_interval: 2
+  weight_decay: 0.00001
+  filtered_only: false

@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.DS_Store
+
+experiments/*
+!experiments/.gitkeep
+
+# maintainer-only tool for publishing checkpoints to the Hugging Face Hub;
+# not needed by (or documented for) repo users, so kept out of the public repo
+scripts/upload_checkpoints.py

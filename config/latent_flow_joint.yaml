@@ -1,0 +1,39 @@
+project_name: "latent_fm"
+experiment_name: "latent_fm_joint_conc"
+data: "metadata/cell_lines_drug_compounds.csv"
+data_root: "/path/to/your/dataset"   # prepended to each row's `relpath` in `data` above
+
+vae:
+  checkpoint: "experiments/microscopy_vae/2026-04-17_16-36-42/best_model.pth"
+  in_channels: 3
+  latent_channels: 4
+  base_channels: 64
+
+model:
+  name: "latent_fm_joint_conc"
+  cell_line: "ONS76"
+  dim: 64
+  dim_mults: [1, 2, 4, 8]
+  resnet_block_groups: 8
+  input_size: 32
+
+preprocessing:
+  img_size: 256
+
+training:
+  epochs: 3000
+  learning_rate: 1e-4
+  batch_size: 100
+  log_interval: 25
+  ema_decay: 0.999
+  filtered_only: true
+
+  # ── Drug ──────────────────────────────────────────────────────────────────
+  drug: "C7"                # one flow model is trained per drug
+  target_concentrations: null   # null = use all available concentrations
+  include_dmso: true        # required so the model learns c=0 -> DMSO morphology
+  conc_transform: "log10"   # null | "log1p" | "sqrt" | "uniform" | "log10"
+
+  # ── Classifier-free guidance (disabled by default) ──────────────────────────
+  p_uncond: 0.0              # CFG dropout rate during training
+  lambda_c: 0.5               # weight of the concentration loss term (Eq. 9)

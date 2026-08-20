@@ -1,0 +1,42 @@
+# Sample config: trains on a small curated subset of REAL images in
+# sample_data/ (see scripts/build_sample_metadata.py). Illustrates the
+# pipeline on real biology; the small image count means it won't produce a
+# strong model. Point `vae.checkpoint` at the checkpoint produced by
+# config/vae_microscopy_sample.yaml before running this.
+project_name: "latent_fm"
+experiment_name: "latent_fm_joint_conc_sample"
+data: "metadata/sample_metadata.csv"
+data_root: "sample_data"
+
+vae:
+  checkpoint: "experiments/microscopy_vae_sample/<timestamp>/best_model.pth"
+  in_channels: 3
+  latent_channels: 4
+  base_channels: 64
+
+model:
+  name: "latent_fm_joint_conc_sample"
+  cell_line: "ONS76"
+  dim: 64
+  dim_mults: [1, 2, 4, 8]
+  resnet_block_groups: 8
+  input_size: 32
+
+preprocessing:
+  img_size: 256
+
+training:
+  epochs: 100
+  learning_rate: 1e-4
+  batch_size: 16
+  log_interval: 10
+  ema_decay: 0.999
+  filtered_only: true
+
+  drug: "C7"
+  target_concentrations: null
+  include_dmso: true
+  conc_transform: "log10"
+
+  p_uncond: 0.0
+  lambda_c: 0.5
