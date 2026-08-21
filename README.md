@@ -1,5 +1,7 @@
 # Joint Flow Matching Enables Continuous Dose-Conditioned Cell Morphing
 
+[![arXiv](https://img.shields.io/badge/arXiv-2608.16424-b31b1b.svg)](https://arxiv.org/abs/2608.16424)
+
 **Accepted at the ECCV 2026 Workshop on Bioimage Computing (BIC).**
 
 Official implementation of our joint flow matching approach for continuous
@@ -226,5 +228,12 @@ Copy that file to the offline machine and pass its path via
 
 ## Citation
 
-TBD — not yet indexed on Google Scholar. A BibTeX entry will be added here
-once one is available.
+If you find our work helpful, please consider citing:
+
+```bibtex
+@article{bogensperger2026joint,
+  title={Joint Flow Matching Enables Continuous Dose-Conditioned Cell Morphing},
+  author={Bogensperger, Lea and Merlo, Manuela and Baumgartner, Martin and Krauthammer, Michael and Ciraulo, Bernard},
+  journal={arXiv preprint arXiv:2608.16424},
+  year={2026}
+}
